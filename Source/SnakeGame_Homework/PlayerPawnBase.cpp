@@ -1,8 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Engine/Classes/Camera/CameraComponent.h"
+#include "Components/InputComponent.h"
 
 #include "PlayerPawnBase.h"
-#include "Engine/Classes/Camera/CameraComponent.h"
 #include "SnakeBase.h"
 
 // Sets default values
@@ -35,6 +36,8 @@ void APlayerPawnBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	PlayerInputComponent->BindAxis("Vertical", this, &APlayerPawnBase::HandlePlayerVerticalInput);
+	PlayerInputComponent->BindAxis("Horizontal", this, &APlayerPawnBase::HandlePlayerHorizontalInput);
 }
 
 void APlayerPawnBase::CreateSnakeActor()
@@ -42,3 +45,24 @@ void APlayerPawnBase::CreateSnakeActor()
 	SnakeActor = GetWorld()->SpawnActor<ASnakeBase>(SnakeActorClass, FTransform());
 }
 
+void APlayerPawnBase::HandlePlayerVerticalInput(float value)
+{
+	if (IsValid(SnakeActor))
+	{
+		if (value > 0 && SnakeActor->LastMoveDirection != EMovementDirection::DOWN)
+			SnakeActor->LastMoveDirection = EMovementDirection::UP;
+		else if (value < 0 && SnakeActor->LastMoveDirection != EMovementDirection::UP)
+			SnakeActor->LastMoveDirection = EMovementDirection::DOWN;
+	}
+}
+
+void APlayerPawnBase::HandlePlayerHorizontalInput(float value)
+{
+	if (IsValid(SnakeActor))
+	{
+		if (value > 0 && SnakeActor->LastMoveDirection != EMovementDirection::LEFT)
+			SnakeActor->LastMoveDirection = EMovementDirection::RIGHT;
+		else if (value < 0 && SnakeActor->LastMoveDirection != EMovementDirection::RIGHT)
+			SnakeActor->LastMoveDirection = EMovementDirection::LEFT;
+	}
+}
