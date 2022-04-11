@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "SnakeElementBase.generated.h"
 
+class UStaticMeshComponent;
+
 UCLASS()
 class SNAKEGAME_HOMEWORK_API ASnakeElementBase : public AActor
 {
@@ -14,6 +16,9 @@ class SNAKEGAME_HOMEWORK_API ASnakeElementBase : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ASnakeElementBase();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* MeshComponent;
 
 protected:
 	// Called when the game starts or when spawned

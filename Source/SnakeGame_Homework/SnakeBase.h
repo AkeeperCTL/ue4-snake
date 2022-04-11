@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "SnakeBase.generated.h"
 
+class ASnakeElementBase;
+
 UCLASS()
 class SNAKEGAME_HOMEWORK_API ASnakeBase : public AActor
 {
@@ -14,6 +16,9 @@ class SNAKEGAME_HOMEWORK_API ASnakeBase : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ASnakeBase();
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ASnakeElementBase> SnakeElementClass;
 
 protected:
 	// Called when the game starts or when spawned
