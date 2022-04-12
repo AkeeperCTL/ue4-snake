@@ -49,22 +49,21 @@ void ASnakeBase::AddSnakeElement(int ElementsNum)
 
 void ASnakeBase::ProcessMovement()
 {
-	FVector MovementVector(0,0,0);
-	float MovementSpeedDelta = ElementSize;
+	FVector MovementVector(ForceInitToZero);
 
 	switch (LastMoveDirection)
 	{
 	case EMovementDirection::UP:
-		MovementVector.X += MovementSpeedDelta;
+		MovementVector.X += ElementSize;
 		break;
 	case EMovementDirection::DOWN:
-		MovementVector.X -= MovementSpeedDelta;
+		MovementVector.X -= ElementSize;
 		break;
 	case EMovementDirection::LEFT:
-		MovementVector.Y += MovementSpeedDelta;
+		MovementVector.Y += ElementSize;
 		break;
 	case EMovementDirection::RIGHT:
-		MovementVector.Y -= MovementSpeedDelta;
+		MovementVector.Y -= ElementSize;
 		break;
 	default:
 		break;
@@ -91,7 +90,7 @@ void ASnakeBase::SnakeElementOverlap(ASnakeElementBase* OverlappedElement, AActo
 {
 	if (IsValid(OverlappedElement))
 	{
-		int32 ElemIndex = 0;
+		int32 ElemIndex;
 		SnakeElements.Find(OverlappedElement, ElemIndex);
 
 		bool bIsFirst = ElemIndex == 0;
@@ -99,7 +98,7 @@ void ASnakeBase::SnakeElementOverlap(ASnakeElementBase* OverlappedElement, AActo
 
 		if (InteractableInterface)
 		{
-			InteractableInterface->Interact(Other, bIsFirst);
+			InteractableInterface->Interact(this, bIsFirst);
 		}
 	}
 }

@@ -21,7 +21,6 @@ ASnakeElementBase::ASnakeElementBase()
 void ASnakeElementBase::BeginPlay()
 {
 	Super::BeginPlay();
-	MeshComponent->OnComponentBeginOverlap.AddDynamic(this, &ASnakeElementBase::HandleBeginOverlap);
 }
 
 // Called every frame

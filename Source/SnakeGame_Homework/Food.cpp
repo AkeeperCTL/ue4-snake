@@ -16,7 +16,6 @@ AFood::AFood()
 void AFood::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -35,6 +34,7 @@ void AFood::Interact(AActor* Interactor, bool bIsHead)
 		if (IsValid(Snake))
 		{
 			Snake->AddSnakeElement(1);
+			Destroy();
 		}
 	}
 }
