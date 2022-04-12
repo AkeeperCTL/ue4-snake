@@ -36,7 +36,7 @@ public:
 	float MovementSpeed;
 
 	UPROPERTY(EditDefaultsOnly)
-	int ElementsCount;
+	int StartElementsCount;
 
 	UPROPERTY()
 	TArray<ASnakeElementBase*> SnakeElements;

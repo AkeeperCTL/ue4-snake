@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "Engine/Classes/Components/StaticMeshComponent.h"
 #include "SnakeBase.h"
 #include "SnakeElementBase.h"
 #include "Interactable.h"
@@ -11,7 +11,7 @@ ASnakeBase::ASnakeBase()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	ElementSize = 50.0f;
-	ElementsCount = 6;
+	StartElementsCount = 3;
 	MovementSpeed = 0.5f;
 	LastMoveDirection = EMovementDirection::UP;
 }
@@ -20,7 +20,7 @@ ASnakeBase::ASnakeBase()
 void ASnakeBase::BeginPlay()
 {
 	Super::BeginPlay();
-	AddSnakeElement(ElementsCount);
+	AddSnakeElement(StartElementsCount);
 	SetActorTickInterval(MovementSpeed);
 }
 
@@ -43,7 +43,7 @@ void ASnakeBase::AddSnakeElement(int ElementsNum)
 
 		int32 ElemIndex = SnakeElements.Add(NewSnakeElement);
 		if (ElemIndex == 0)
-			NewSnakeElement->SetFirstElementType();
+			NewSnakeElement->SetFirstElementType();			
 	}
 }
 
@@ -72,6 +72,8 @@ void ASnakeBase::ProcessMovement()
 
 	//AddActorWorldOffset(MovementVector);
 
+	SnakeElements[0]->ToggleCollision();
+
 	for (int i = SnakeElements.Num() - 1; i > 0; --i)
 	{
 		auto CurrentElement = SnakeElements[i];
@@ -82,6 +84,7 @@ void ASnakeBase::ProcessMovement()
 	}
 
 	SnakeElements[0]->AddActorWorldOffset(MovementVector);
+	SnakeElements[0]->ToggleCollision();
 }
 
 void ASnakeBase::SnakeElementOverlap(ASnakeElementBase* OverlappedElement, AActor* Other)
