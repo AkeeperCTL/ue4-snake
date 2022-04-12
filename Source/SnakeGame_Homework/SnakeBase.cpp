@@ -108,4 +108,3 @@ void ASnakeBase::SnakeElementOverlap(ASnakeElementBase* OverlappedElement, AActo
 		}
 	}
 }
-
