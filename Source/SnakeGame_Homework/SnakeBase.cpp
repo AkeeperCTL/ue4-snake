@@ -37,13 +37,16 @@ void ASnakeBase::AddSnakeElement(int ElementsNum)
 	{
 		FVector NewElementLocation(SnakeElements.Num() * ElementSize, 0, 0);
 		FTransform NewElementTransform(GetActorLocation() - NewElementLocation);
-		ASnakeElementBase* NewSnakeElement = GetWorld()->SpawnActor<ASnakeElementBase>(SnakeElementClass, NewElementTransform);
 
+		ASnakeElementBase* NewSnakeElement = GetWorld()->SpawnActor<ASnakeElementBase>(SnakeElementClass, NewElementTransform);
+		
 		NewSnakeElement->SnakeOwner = this;
 
 		int32 ElemIndex = SnakeElements.Add(NewSnakeElement);
 		if (ElemIndex == 0)
-			NewSnakeElement->SetFirstElementType();			
+			NewSnakeElement->SetFirstElementType();
+		else
+			NewSnakeElement->SetActorHiddenInGame(true);
 	}
 }
 
@@ -80,6 +83,9 @@ void ASnakeBase::ProcessMovement()
 
 		FVector PrevLocation = PrevElement->GetActorLocation();
 		CurrentElement->SetActorLocation(PrevLocation);
+
+		if (CurrentElement->IsHidden())
+			CurrentElement->SetActorHiddenInGame(false);
 	}
 
 	SnakeElements[0]->AddActorWorldOffset(MovementVector);
