@@ -25,17 +25,6 @@ AFood::AFood()
 	LoadMeshesFromAssets(3);
 }
 
-void AFood::ProcessRotation(float deltaTime)
-{
-	if (!bIsRotatable)
-		return;
-
-	FRotator CurrentRotation = GetActorRotation();
-	CurrentRotation.Yaw += deltaTime * RotationSpeed;
-
-	SetActorRotation(CurrentRotation);
-}
-
 // Called when the game starts or when spawned
 void AFood::BeginPlay()
 {
@@ -49,6 +38,17 @@ void AFood::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	ProcessRotation(DeltaTime);
+}
+
+void AFood::ProcessRotation(float deltaTime)
+{
+	if (!bIsRotatable)
+		return;
+
+	FRotator CurrentRotation = GetActorRotation();
+	CurrentRotation.Yaw += deltaTime * RotationSpeed;
+
+	SetActorRotation(CurrentRotation);
 }
 
 void AFood::Interact(AActor* Interactor, bool bIsHead)
