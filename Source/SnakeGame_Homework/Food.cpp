@@ -9,6 +9,7 @@
 
 #include "Runtime/Engine/Public/EngineGlobals.h"
 #include "Math/UnrealMathUtility.h"
+#include "Engine/Classes/Components/BoxComponent.h"
 
 // Sets default values
 AFood::AFood()
@@ -60,6 +61,13 @@ void AFood::Interact(AActor* Interactor, bool bIsHead)
 		if (IsValid(Snake))
 		{
 			Snake->AddSnakeElement(1);
+
+			if (Snake->MovementSpeed > 0.15f)
+			{
+				Snake->MovementSpeed -= 0.05f;
+				Snake->SetActorTickInterval(Snake->MovementSpeed);
+			}		
+
 			Destroy();
 		}
 	}
@@ -72,15 +80,6 @@ void AFood::LoadMeshesFromAssets(int MaxMeshesCount)
 		FName MeshPath = "";
 		switch (i)
 		{
-		//case 0:
-		//	MeshPath = TEXT("/Game/Meshes/Food/SM_Item_Fruit_01.SM_Item_Fruit_01");
-		//	break;
-		//case 1:
-		//	MeshPath = TEXT("/Game/Meshes/Food/SM_Item_Fruit_02.SM_Item_Fruit_02");
-		//	break;
-		//case 2:
-		//	MeshPath = TEXT("/Game/Meshes/Food/SM_Item_Fruit_03.SM_Item_Fruit_03");
-		//	break;
 		case 0:
 			MeshPath = TEXT("/Game/Meshes/Food/Apple.Apple");
 			break;
@@ -107,7 +106,7 @@ void AFood::SelectRandomMesh()
 	if (IsValid(RandomMesh))
 	{
 		MeshComponent->SetStaticMesh(RandomMesh);
-		MeshComponent->SetWorldScale3D(FVector(2, 2, 2));
+		MeshComponent->SetWorldScale3D(FVector(1.2f, 1.2f, 1.2f));
 		MeshComponent->SetMaterial(0,RandomMesh->GetMaterial(0));
 	}
 }

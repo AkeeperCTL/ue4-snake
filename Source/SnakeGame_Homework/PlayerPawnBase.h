@@ -18,7 +18,7 @@ public:
 	// Sets default values for this pawn's properties
 	APlayerPawnBase();
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UCameraComponent* CameraComponent;
 
 	UPROPERTY(BlueprintReadWrite)
