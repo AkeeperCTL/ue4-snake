@@ -72,14 +72,23 @@ void AFood::LoadMeshesFromAssets(int MaxMeshesCount)
 		FName MeshPath = "";
 		switch (i)
 		{
+		//case 0:
+		//	MeshPath = TEXT("/Game/Meshes/Food/SM_Item_Fruit_01.SM_Item_Fruit_01");
+		//	break;
+		//case 1:
+		//	MeshPath = TEXT("/Game/Meshes/Food/SM_Item_Fruit_02.SM_Item_Fruit_02");
+		//	break;
+		//case 2:
+		//	MeshPath = TEXT("/Game/Meshes/Food/SM_Item_Fruit_03.SM_Item_Fruit_03");
+		//	break;
 		case 0:
-			MeshPath = TEXT("/Game/Meshes/Food/SM_Item_Fruit_01.SM_Item_Fruit_01");
+			MeshPath = TEXT("/Game/Meshes/Food/Apple.Apple");
 			break;
 		case 1:
-			MeshPath = TEXT("/Game/Meshes/Food/SM_Item_Fruit_02.SM_Item_Fruit_02");
+			MeshPath = TEXT("/Game/Meshes/Food/Banana.Banana");
 			break;
 		case 2:
-			MeshPath = TEXT("/Game/Meshes/Food/SM_Item_Fruit_03.SM_Item_Fruit_03");
+			MeshPath = TEXT("/Game/Meshes/Food/Grusha.Grusha");
 			break;
 		}
 
