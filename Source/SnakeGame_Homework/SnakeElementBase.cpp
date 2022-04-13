@@ -5,6 +5,7 @@
 #include "Engine/Classes/Components/StaticMeshComponent.h"
 
 #include "SnakeBase.h"
+#include "SnakeGame_HomeworkGameModeBase.h"
 
 // Sets default values
 ASnakeElementBase::ASnakeElementBase()
@@ -37,9 +38,15 @@ void ASnakeElementBase::SetFirstElementType_Implementation()
 
 void ASnakeElementBase::Interact(AActor* Interactor, bool bIsHead)
 {
-	auto Snake = Cast<ASnakeBase>(Interactor);
+	//GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Blue, FString(TEXT("SnakeIsDead")));
+
+ 	auto Snake = Cast<ASnakeBase>(Interactor);
 	if (IsValid(Snake))
 	{
+		ASnakeGameMode* GameMode = Cast<ASnakeGameMode>(GetWorld()->GetAuthGameMode());
+		if (IsValid(GameMode))
+			GameMode->SnakeIsDead();
+
 		Snake->Destroy();
 	}
 }

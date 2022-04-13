@@ -1,9 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "PlayerPawnBase.h"
 #include "Engine/Classes/Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
-
-#include "PlayerPawnBase.h"
 #include "SnakeBase.h"
 
 // Sets default values
@@ -20,6 +19,10 @@ APlayerPawnBase::APlayerPawnBase()
 void APlayerPawnBase::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (GetWorld()->GetName() == FString(TEXT("Main_Menu")))
+		return;
+
 	SetActorRotation(FRotator(-90, 0, 0));
 	CreateSnakeActor();
 }

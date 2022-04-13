@@ -3,6 +3,7 @@
 
 #include "Fence.h"
 #include "SnakeBase.h"
+#include "SnakeGame_HomeworkGameModeBase.h"
 
 // Sets default values
 AFence::AFence()
@@ -33,6 +34,12 @@ void AFence::Interact(AActor* Interactor, bool bIsHead)
 	{
 		auto Snake = Cast<ASnakeBase>(Interactor);
 		if (IsValid(Snake))
+		{
+			ASnakeGameMode* GameMode = Cast<ASnakeGameMode>(GetWorld()->GetAuthGameMode());
+			if (IsValid(GameMode))
+				GameMode->SnakeIsDead();
+
 			Snake->Destroy();
+		}
 	}
 }

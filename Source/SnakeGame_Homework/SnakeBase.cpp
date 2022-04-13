@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Engine/Classes/Components/StaticMeshComponent.h"
 #include "SnakeBase.h"
+#include "Engine/Classes/Components/StaticMeshComponent.h"
 #include "SnakeElementBase.h"
 #include "Interactable.h"
 
@@ -20,6 +20,7 @@ ASnakeBase::ASnakeBase()
 void ASnakeBase::BeginPlay()
 {
 	Super::BeginPlay();
+
 	AddSnakeElement(StartElementsCount);
 	SetActorTickInterval(MovementSpeed);
 }
@@ -28,6 +29,7 @@ void ASnakeBase::BeginPlay()
 void ASnakeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
 	ProcessMovement();
 }
 

@@ -3,6 +3,7 @@
 
 #include "ActorSpawner.h"
 #include "Components/BoxComponent.h"
+#include "SnakeGame_HomeworkGameModeBase.h"
 
 // Sets default values
 AActorSpawner::AActorSpawner()
@@ -99,9 +100,21 @@ void AActorSpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	for (AActor* Actor : SpawnedActors)
+	//Undefined behaviour
+	/*for (AActor* Actor : SpawnedActors)
 	{
+		if (!IsValid(Actor))
+		{
+			SpawnedActors.Remove(Actor);
+		}	
+	}*/
+
+	for (int i = 0; i < SpawnedActors.Num(); i++)
+	{
+		AActor* Actor = SpawnedActors[i];
 		if (!IsValid(Actor))
 			SpawnedActors.Remove(Actor);
 	}
+
+	//GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::White, FString::Printf(TEXT("SpawnedActors: %d"), SpawnedActors.Num()));
 }
