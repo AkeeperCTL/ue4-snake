@@ -94,7 +94,7 @@ void AFood::LoadMeshesFromAssets(int MaxMeshesCount)
 		ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(*MeshPath.ToString());
 
 		if (MeshAsset.Succeeded())
-			RandomMeshes.Add(MeshAsset.Object);
+			RandomMeshes.AddUnique(MeshAsset.Object);
 	}
 }
 
