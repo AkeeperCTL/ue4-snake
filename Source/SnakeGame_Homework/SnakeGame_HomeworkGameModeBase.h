@@ -17,8 +17,14 @@ public:
 	void SnakeIsDead();
 	void SnakeIsDead_Implementation();
 
+	UPROPERTY(BlueprintReadWrite)
+	int SnakeGameScore;
+
+	UPROPERTY(BlueprintReadWrite)
+	int LastSnakeGameScore;
+
 	//UFUNCTION(BlueprintCallable)
-	//bool IsInMainMenu();
+	//bool IsInMainMenu()-;
 };
 
 typedef ASnakeGame_HomeworkGameModeBase ASnakeGameMode;

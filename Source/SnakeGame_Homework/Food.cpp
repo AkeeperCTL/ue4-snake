@@ -10,6 +10,7 @@
 #include "Runtime/Engine/Public/EngineGlobals.h"
 #include "Math/UnrealMathUtility.h"
 #include "Engine/Classes/Components/BoxComponent.h"
+#include "SnakeGame_HomeworkGameModeBase.h"
 
 // Sets default values
 AFood::AFood()
@@ -52,6 +53,11 @@ void AFood::ProcessRotation(float deltaTime)
 	SetActorRotation(CurrentRotation);
 }
 
+void AFood::OnInteracted_Implementation()
+{
+
+}
+
 void AFood::Interact(AActor* Interactor, bool bIsHead)
 {
 	if (bIsHead)
@@ -66,9 +72,13 @@ void AFood::Interact(AActor* Interactor, bool bIsHead)
 			{
 				Snake->MovementSpeed -= 0.05f;
 				Snake->SetActorTickInterval(Snake->MovementSpeed);
-			}		
+			}
 
 			Destroy();
+
+			ASnakeGameMode* GameMode = Cast<ASnakeGameMode>(GetWorld()->GetAuthGameMode());
+			if (IsValid(GameMode))
+				GameMode->SnakeGameScore++;
 		}
 	}
 }

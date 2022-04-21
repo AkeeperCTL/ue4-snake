@@ -5,14 +5,15 @@
 
 ASnakeGame_HomeworkGameModeBase::ASnakeGame_HomeworkGameModeBase()
 {
-	
+	SnakeGameScore, LastSnakeGameScore = 0;
 }
 
 
-void ASnakeGameMode::SnakeIsDead_Implementation()
+void ASnakeGame_HomeworkGameModeBase::SnakeIsDead_Implementation()
 {
-	//
+	LastSnakeGameScore = SnakeGameScore;
 }
+
 //
 //bool ASnakeGame_HomeworkGameModeBase::IsInMainMenu()
 //{

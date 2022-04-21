@@ -24,6 +24,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ProcessRotation(float deltaTime);
 
+	UFUNCTION(BlueprintNativeEvent)
+	void OnInteracted();
+	void OnInteracted_Implementation();
+
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* MeshComponent;
 
